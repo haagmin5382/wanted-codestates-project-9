@@ -6,7 +6,7 @@ const Container = styled.div`
   line-height: 50vh;
   align-items: center;
   text-align: center;
-  font-size: 50px;
+  font-size: 55px;
   color: silver;
 `;
 const NoInput = () => {
