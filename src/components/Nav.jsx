@@ -105,7 +105,6 @@ const Nav = () => {
 
   const searchNickname = () => {
     getDataFromAPI(nickname).then((data) => {
-      console.log(data.data);
       dispatch(search(data.data));
     });
   };
