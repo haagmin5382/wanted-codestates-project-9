@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import Ranking from "./pages/Ranking";
+import { useSelector } from "react-redux";
 
 function App() {
   return (

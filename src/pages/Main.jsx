@@ -5,25 +5,32 @@ import styled from "styled-components";
 import Matching from "../components/MainComponent/Matching";
 import MainFlex from "../components/MainComponent/MainFlex";
 import GameMode from "../components/MainComponent/GameMode";
+import NoInput from "../components/NoInput";
 import UserRecord from "../components/MainComponent/RecordComponent/UserRecord";
-
+import { useSelector } from "react-redux";
 const MainConatiner = styled.div`
   align-items: center;
   margin: 20px auto;
   width: 1300px;
 `;
 const Main = () => {
-  // const [data, setData] = useState("");
+  const userData = useSelector((state) => state.data);
+  console.log(userData);
 
-  // getDataFromAPI("test").then((data) => console.log(data.data));
   return (
-    <MainConatiner>
-      <UserInfo />
-      <Matching />
-      <MainFlex />
-      <GameMode />
-      <UserRecord />
-    </MainConatiner>
+    <div>
+      {Object.keys(userData).length >= 1 ? (
+        <MainConatiner>
+          <UserInfo />
+          <Matching />
+          <MainFlex />
+          <GameMode />
+          <UserRecord />
+        </MainConatiner>
+      ) : (
+        <NoInput />
+      )}
+    </div>
   );
 };
 
