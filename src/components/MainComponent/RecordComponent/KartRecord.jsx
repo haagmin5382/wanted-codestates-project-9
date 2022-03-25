@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Kart } from "../../../constants/Kart";
 
 const KartRecordContainer = styled.div`
   margin-left: 15px;
@@ -43,15 +44,24 @@ const TrackList = styled.ul`
   }
 `;
 
-const KartRecord = () => {
+const KartRecord = ({ kartInfo }) => {
+  const kartname = Kart.filter((obj) => obj.id === kartInfo[0]);
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    setImage(
+      `https://static.api.nexon.co.kr/kart/latest/kart/${kartInfo[0]}.png`
+    );
+  }, []);
+  console.log(kartInfo[0]);
   return (
     <KartRecordContainer>
       <KartRecordTitle>
         <KartType>일반</KartType>
-        <KartName>어벤져</KartName>
+        <KartName>{kartname[0].name}</KartName>
       </KartRecordTitle>
       <KartRecordContent>
-        <KartImg />
+        <KartImg src={image} />
         <TrackList>
           <li>코리아 제주 해오름</li>
           <li>코리아 제주 해오름</li>

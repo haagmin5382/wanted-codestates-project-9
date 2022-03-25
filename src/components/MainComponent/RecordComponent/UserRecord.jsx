@@ -179,11 +179,15 @@ const UserRecord = () => {
   });
   // console.log(matches);
 
-  // const kart = {};
+  const kart = {};
 
-  // matches.forEach((match) => {
-  //   kart[match.player.kart] = (kart[match.player.kart] || 0) + 1;
-  // });
+  matches.forEach((match) => {
+    kart[match.player.kart] = (kart[match.player.kart] || 0) + 1;
+  });
+
+  const kartArr = Object.entries(kart).sort((a, b) => {
+    return b[1] - a[1];
+  });
   return (
     <Container>
       {menu.map((el, index) => {
@@ -215,7 +219,7 @@ const UserRecord = () => {
           {currentMenu === 0 ? (
             <Line options={options} data={data} />
           ) : (
-            <KartRecord />
+            <KartRecord kartInfo={kartArr[0]} />
           )}
           <TableContainer>
             <table>
@@ -240,23 +244,25 @@ const UserRecord = () => {
                 )}
               </thead>
               <tbody>
-                {currentMenu === 0 ? (
-                  matchTimesArr.map((arr, idx) => {
-                    return (
-                      <TrackTable
-                        key={idx}
-                        matchAndTrack={arr}
-                        Boolean={currentTab === idx ? true : false}
-                        matches={matches}
-                        setCurrentTab={setCurrentTab}
-                        index={idx}
-                        setTrackName={setTrackName}
-                      />
-                    );
-                  })
-                ) : (
-                  <KartTable />
-                )}
+                {currentMenu === 0
+                  ? matchTimesArr.map((arr, idx) => {
+                      return (
+                        <TrackTable
+                          key={idx}
+                          matchAndTrack={arr}
+                          Boolean={currentTab === idx ? true : false}
+                          matches={matches}
+                          setCurrentTab={setCurrentTab}
+                          index={idx}
+                          setTrackName={setTrackName}
+                        />
+                      );
+                    })
+                  : kartArr.map((kart, index) => {
+                      return (
+                        <KartTable key={index} kart={kart} matches={matches} />
+                      );
+                    })}
               </tbody>
             </table>
           </TableContainer>
